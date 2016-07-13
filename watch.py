@@ -1,6 +1,7 @@
 import sys
 import time
 import logging
+import os 
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
@@ -21,7 +22,11 @@ class RjEventHandler(FileSystemEventHandler):
                 print event.src_path
                 print self._fname
 	        if event.is_directory == False :
-			if event.src_path == self._fname :
+			"""if event.src_path == self._fname :"""
+			sz1=os.path.getsize(event.src_path)
+			time.sleep(10)
+			sz2=os.path.getsize(event.src_path)
+			if sz1 == sz2
 				print 'File has been created %s' % event.src_path
 
 	def on_deleted(self, event):
